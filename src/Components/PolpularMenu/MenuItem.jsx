@@ -2,9 +2,10 @@
 // eslint-disable-next-line react/prop-types
 const MenuItem = ({ item }) => {
     // eslint-disable-next-line react/prop-types
-    const { name, recipe, image, category, price } = item;
+    const { name, recipe, image, price } = item;
     return (
         <div className="flex space-x-4">
+            
             <img style={{borderRadius: "0px 200px 200px 200px"}} className="w-[100px]" src={image} alt="" />
             <div>
                 <h3 className="uppercase">{name}-------------------</h3>
