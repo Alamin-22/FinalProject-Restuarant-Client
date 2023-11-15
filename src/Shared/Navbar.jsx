@@ -1,15 +1,26 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
+import { FiShoppingCart } from "react-icons/fi";
+import useCart from "../Hooks/useCart";
 
 
 const Navbar = () => {
 
     const { user, logout } = useAuth();
+    const [cart]= useCart();
 
     const navlinks = <>
         <li><NavLink to={"/"}> Home</NavLink></li>
         <li><NavLink to={"/Menu"}> Menu</NavLink></li>
         <li><NavLink to={"/order/salad"}>Order Food</NavLink></li>
+        <li>
+            <Link>
+                <button className="btn btn-sm mr-4">
+                <FiShoppingCart />
+                    <div className="badge badge-secondary">+{cart.length}</div>
+                </button>
+            </Link>
+        </li>
     </>
 
     const handleLogOut = () => {

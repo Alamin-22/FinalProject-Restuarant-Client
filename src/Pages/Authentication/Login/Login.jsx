@@ -1,6 +1,6 @@
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, } from 'react';
 import useAuth from '../../../Hooks/useAuth';
 import Swal from 'sweetalert2';
@@ -11,6 +11,8 @@ const Login = () => {
 
     const { logIn } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
+    // console.log("checking current location", location);
 
 
     const [disabled, setDisabled] = useState(true);
