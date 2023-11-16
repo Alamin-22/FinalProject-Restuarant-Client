@@ -7,16 +7,16 @@ import useCart from "../Hooks/useCart";
 const Navbar = () => {
 
     const { user, logout } = useAuth();
-    const [cart]= useCart();
+    const [cart] = useCart();
 
     const navlinks = <>
         <li><NavLink to={"/"}> Home</NavLink></li>
         <li><NavLink to={"/Menu"}> Menu</NavLink></li>
         <li><NavLink to={"/order/salad"}>Order Food</NavLink></li>
         <li>
-            <Link>
+            <Link to={"/dashboard/cart"}>
                 <button className="btn btn-sm mr-4">
-                <FiShoppingCart />
+                    <FiShoppingCart />
                     <div className="badge badge-secondary">+{cart.length}</div>
                 </button>
             </Link>
