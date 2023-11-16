@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState, } from 'react';
 import useAuth from '../../../Hooks/useAuth';
 import Swal from 'sweetalert2';
+import SocialLogin from '../Register/SocialLogin/socialLogin';
 
 
 const Login = () => {
@@ -85,7 +86,6 @@ const Login = () => {
                                     <LoadCanvasTemplate />
                                 </label>
                                 <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="Type the captcha here.." className="input input-bordered" />
-
                             </div>
 
 
@@ -93,8 +93,12 @@ const Login = () => {
                                 {/* TODO: apply disabled for re captcha */}
                                 <input disabled={disabled} className="btn btn-primary" type="submit" value="Login" />
                             </div>
+
                         </form>
-                        <p className='mx-auto'><small>New Here? <Link to="/register" className='text-blue-800 font-semibold' >Create an account</Link> </small></p>
+                        <p className='mx-auto '><small>New Here? <Link to="/register" className='text-blue-800 font-semibold' >Create an account</Link> </small></p>
+                        <div>
+                            <SocialLogin></SocialLogin>
+                        </div>
                     </div>
                 </div>
             </div>

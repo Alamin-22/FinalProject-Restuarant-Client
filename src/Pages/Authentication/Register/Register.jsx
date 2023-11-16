@@ -3,14 +3,15 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import useAxiosPublic from "../../../Hooks/useAxiosPublic";
 
 const Register = () => {
 
     const { createUser, updateUserProfile } = useAuth();
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
-
-    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
         createUser(data.email, data.password)
@@ -19,22 +20,35 @@ const Register = () => {
                 console.log(loggedUser)
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
-                        console.log('user profile info updated')
-                        reset();
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'User created successfully.',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        navigate('/');
+
+
+                        const userInfo = {
+                            name: data.name, email: data.email,
+                        }
+
+
+                        //    send user data to the data base
+                        axiosPublic.post("/users", userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    reset();
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/');
+                                }
+                            })
+
 
                     })
             })
             .catch(error => {
                 console.log(error);
-                Swal.fire("Oops", `${error}`, "success")
+                Swal.fire("Oops", `${error}`, "error")
 
             })
     }
