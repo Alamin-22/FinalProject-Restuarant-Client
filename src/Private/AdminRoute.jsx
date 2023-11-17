@@ -1,12 +1,15 @@
 import { Navigate, useLocation } from "react-router-dom";
-import PropTypes from 'prop-types';
+import useAdmin from "../Hooks/useAdmin";
 import useAuth from "../Hooks/useAuth";
+import PropTypes from 'prop-types';
 
-const PrivateRoute = ({ children }) => {
+const AdminRoute = ({ children }) => {
     const { user, loading } = useAuth();
+    const [isAdmin, adminLoading] = useAdmin();
+
     const location = useLocation();
 
-    if (loading) {
+    if (loading || adminLoading) {
         return <>
             <div className="flex flex-col gap-4 w-52">
                 <div className="skeleton h-32 w-full"></div>
@@ -17,12 +20,12 @@ const PrivateRoute = ({ children }) => {
         </>
     }
 
-    if (user) {
+    if (user && isAdmin) {
         return children;
     }
     return <Navigate to={"/login"} state={location.pathname} replace></Navigate>
 };
-PrivateRoute.propTypes = {
+AdminRoute.propTypes = {
     children: PropTypes.node,
 };
-export default PrivateRoute;
+export default AdminRoute;
