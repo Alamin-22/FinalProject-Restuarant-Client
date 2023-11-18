@@ -14,7 +14,6 @@ const AddItems = () => {
     const { register, handleSubmit, reset } = useForm();
     const axiosSecure = useAxios();
     const onSubmit = async (data) => {
-        console.log("checking hosting key", image_hosting_key);
         const formData = new FormData();
         formData.append('image', data.image[0])
 
@@ -39,7 +38,6 @@ const AddItems = () => {
                         .then(res => {
                             console.log(res.data)
                             if (res.data.insertedId) {
-                                // show success popup
                                 reset();
                                 Swal.fire({
                                     position: "top-end",
