@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useAxios from "../../Hooks/useAxios";
 import Swal from "sweetalert2";
 import SectionTile from "../../Components/SectionTitle/SectionTile";
